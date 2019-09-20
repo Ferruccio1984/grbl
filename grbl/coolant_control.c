@@ -27,7 +27,7 @@ void coolant_init()
   #ifdef ENABLE_M7
     COOLANT_MIST_DDR |= (1 << COOLANT_MIST_BIT);
   #endif
-  coolant_stop();
+  //coolant_stop();
 }
 
 
