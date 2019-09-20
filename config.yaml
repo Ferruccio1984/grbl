@@ -1,0 +1,465 @@
+accessControl:
+  enabled: false
+api:
+  key: 5B96D6151C534AF4B2283509BF86DF91
+appearance:
+  color: green
+  components:
+    disabled:
+      sidebar:
+      - state
+      - files
+      tab:
+      - plugin_bettergrblsupport
+      - temperature
+      - terminal
+      - timelapse
+      - gcodeviewer
+    order:
+      tab:
+      - plugin_bettergrblsupport
+      - temperature
+      - control
+      - gcodeviewer
+      - terminal
+      - timelapse
+  name: IREN BuoyDeploy system
+controls:
+- children:
+  - command: M999
+    confirm: null
+    name: Reset
+  - commands:
+    - M08
+    confirm: null
+    name: magnete ON
+  - commands:
+    - M09
+    confirm: Assicurarsi che la boa sia stata già rilasciata
+    name: magnete OFF
+  - command: $X
+    confirm: null
+    name: Unlock
+  - commands:
+    - G91
+    - G1 Z+100 F3000
+    confirm: null
+    name: ritrae tutto
+  - commands:
+    - G91
+    - G1 Z-900 F4000
+    - G90
+    confirm: null
+    name: estende tutto
+  layout: horizontal
+  name: Comandi Verricello
+- children:
+  - default: ''
+    name: State
+    regex: <([^,]+)[,|][WM]Pos:([+\-\d.]+,[+\-\d.]+,[+\-\d.]+)
+    template: 'State: {0} - Position: {1}'
+    type: feedback
+  - default: ''
+    name: GCode State
+    regex: F([\d.]+) S([\d.]+)
+    template: 'Speed: {0}  Power: {1}'
+    type: feedback
+  - command: $H
+    confirm: null
+    name: -> home
+  - command: $SLP
+    confirm: assicurarsi che il verricello non abbia alcun carico
+    name: EcoMode
+  - commands:
+    - G90
+    - G1 Z-20    F2000
+    - G1 Y-18  F3500
+    - G1 X-346 F3500
+    - G1 Z-850 F3500
+    confirm: null
+    name: vai a sgancio
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-339.182 Y-343.983 F4500
+    - G1 Z-280 F3500
+    - M08
+    - G1 Z-100    F2000
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 1
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-339.182 Y-644.992 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 2
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 X-339.182 Y-941.988 F4500
+    - G1 Z-280 F3500
+    - M08
+    - G1 Z-100    F2000
+    - G1 Y-18  F1500
+    - G1 X-349.182 F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 3
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-339.182 Y-1212 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 4
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-630.182 Y-343.983 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-359.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 5
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-630.182 Y-649.979 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-359.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 6
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-630.182 Y-931.976 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-349.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1500
+    - M09
+    confirm: null
+    name: deposita Boa 7
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-630 Y-1212 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-359.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 8
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-50 Y-343.983 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-359.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 9
+  - commands:
+    - G90
+    - G1 Z-50    F2000
+    - G1 X-35 Y-647.992  F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-359.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 10
+  - commands:
+    - G90
+    - G1 Z-35    F2000
+    - G1 X-50 Y-940.976  F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-349.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 11
+  - commands:
+    - G90
+    - G1 Z-35    F2000
+    - G1 X-40 Y-1232.985 F4500
+    - G1 Z-280 F3000
+    - M08
+    - G1 Z-100    F1000
+    - G1 X-349.182 F1500
+    - G1 Y-18  F1500
+    - G1 Z-850 F1000
+    - M09
+    confirm: null
+    name: deposita Boa 12
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-1244.985 F1500
+    - G1 X-50   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 12
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-940.976 F1500
+    - G1 X-35   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 11
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-647.992 F1500
+    - G1 X-35   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 10
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-352.983 F1500
+    - G1 X-35   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 9
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-1232.985 F1500
+    - G1 X-632   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 8
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-931.976 F1500
+    - G1 X-632   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 7
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-649.979 F1500
+    - G1 X-632   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 6
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-343.983 F1500
+    - G1 X-632   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 5
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 Y-1243.972 F1500
+    - G1 X-359.182   F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 4
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 X-359.182   F1500
+    - G1 Y-941.988 F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 3
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 X-359.182   F1500
+    - G1 Y-644.992 F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 2
+  - commands:
+    - G90
+    - G1 Z-50    F1000
+    - G1 X-359.182   F1500
+    - G1 Y-355.008 F1500
+    - G1 Z-280 F1000
+    - M09
+    confirm: null
+    name: carica Boa 1
+  layout: horizontal
+  name: Posizione Verricello / comandi Emergenza
+  type: section
+feature:
+  modelSizeDetection: false
+plugins:
+  _disabled:
+  - cura
+  - printer_safety_check
+  announcements:
+    _config_version: 1
+    channels:
+      _blog:
+        read_until: 1563963300
+      _important:
+        read_until: 1521111600
+      _octopi:
+        read_until: 1549966200
+      _plugins:
+        read_until: 1568160000
+      _releases:
+        read_until: 1568728800
+  bettergrblsupport:
+    frame_origin: grblCenter
+    grblSettingsBackup: 0|10|Step pulse time, microseconds||1|255|Step idle delay,
+      milliseconds||2|0|Step pulse invert, mask||3|224|Step direction invert, mask||4|1|Invert
+      step enable pin, boolean||5|0|Invert limit pins, boolean||6|0|Invert probe pin,
+      boolean||10|1|Status report options, mask||11|0.020|Junction deviation, millimeters||12|0.002|Arc
+      tolerance, millimeters||13|0|Report in inches, boolean||20|0|Soft limits enable,
+      boolean||21|1|Hard limits enable, boolean||22|1|Homing cycle enable, boolean||23|0|Homing
+      direction invert, mask||24|350.000|Homing locate feed rate, mm/min||25|3500.000|Homing
+      search seek rate, mm/min||26|250|Homing switch debounce delay, milliseconds||27|15.000|Homing
+      switch pull-off distance, millimeters||30|1000|Maximum spindle speed, RPM||31|0|Minimum
+      spindle speed, RPM||32|0|Laser-mode enable, boolean||100|53.000|X-axis steps
+      per millimeter||101|53.000|Y-axis steps per millimeter||102|1000|Z-axis steps
+      per millimeter||110|6000.000|X-axis maximum rate, mm/min||111|6000.000|Y-axis
+      maximum rate, mm/min||112|500.000|Z-axis maximum rate, mm/min||120|900.000|X-axis
+      acceleration, mm/sec^2||121|150.000|Y-axis acceleration, mm/sec^2||122|70.000|Z-axis
+      acceleration, mm/sec^2||130|749.000|X-axis maximum travel, millimeters||131|1280.000|Y-axis
+      maximum travel, millimeters||132|7000.000|Z-axis maximum travel, millimeters||
+    grblSettingsText: 0|10|Step pulse time, microseconds||1|255|Step idle delay, milliseconds||2|0|Step
+      pulse invert, mask||3|224|Step direction invert, mask||4|1|Invert step enable
+      pin, boolean||5|0|Invert limit pins, boolean||6|0|Invert probe pin, boolean||10|1|Status
+      report options, mask||11|0.020|Junction deviation, millimeters||12|0.002|Arc
+      tolerance, millimeters||13|0|Report in inches, boolean||20|0|Soft limits enable,
+      boolean||21|1|Hard limits enable, boolean||22|1|Homing cycle enable, boolean||23|0|Homing
+      direction invert, mask||24|350.000|Homing locate feed rate, mm/min||25|2500.000|Homing
+      search seek rate, mm/min||26|250|Homing switch debounce delay, milliseconds||27|30.000|Homing
+      switch pull-off distance, millimeters||30|1000|Maximum spindle speed, RPM||31|0|Minimum
+      spindle speed, RPM||32|0|Laser-mode enable, boolean||100|53.000|X-axis steps
+      per millimeter||101|53.000|Y-axis steps per millimeter||102|1000.000|Z-axis
+      steps per millimeter||110|6000.000|X-axis maximum rate, mm/min||111|6000.000|Y-axis
+      maximum rate, mm/min||112|1000.000|Z-axis maximum rate, mm/min||120|900.000|X-axis
+      acceleration, mm/sec^2||121|150.000|Y-axis acceleration, mm/sec^2||122|30.000|Z-axis
+      acceleration, mm/sec^2||130|749.000|X-axis maximum travel, millimeters||131|1280.000|Y-axis
+      maximum travel, millimeters||132|7000.000|Z-axis maximum travel, millimeters||
+    hideControlTab: false
+    showZ: true
+    suppressM115: false
+  cura:
+    cura_engine: /usr/local/bin/cura_engine
+  discovery:
+    publicPort: 80
+    upnpUuid: fcaf098b-6901-41c8-95cf-32bc41607c0d
+  errortracking:
+    unique_id: fed4ec56-a6e8-4d55-89de-e9bcf2435e49
+  softwareupdate:
+    _config_version: 6
+    check_providers:
+      bettergrblsupport: bettergrblsupport
+      customcontrol: customControl
+      fanspeedslider: fanspeedslider
+  tracking:
+    enabled: false
+    unique_id: 0c8d8547-9e07-485c-87c6-6c38b106ba9a
+printerProfiles:
+  default: _default
+serial:
+  autoconnect: true
+  checksumRequiringCommands: []
+  disconnectOnErrors: false
+  helloCommand: M5
+  ignoreErrorsFromFirmware: true
+  maxCommunicationTimeouts:
+    idle: 0
+    long: 0
+    printing: 0
+  neverSendChecksum: true
+  timeout:
+    communication: 60.0
+    connection: 40.0
+    positionLogWait: 40.0
+server:
+  commands:
+    serverRestartCommand: sudo service octoprint restart
+    systemRestartCommand: sudo shutdown -r now
+    systemShutdownCommand: sudo shutdown -h now
+  firstRun: false
+  onlineCheck:
+    enabled: true
+  pluginBlacklist:
+    enabled: false
+  secretKey: ImxwH4KmgvLCVuqKlWsAtRKwahqaUySe
+  seenWizards:
+    corewizard: 3
+    cura: null
+    tracking: null
+temperature:
+  profiles:
+  - bed: 100
+    chamber: null
+    extruder: 210
+    name: ABS
+  - bed: 60
+    chamber: null
+    extruder: 180
+    name: PLA
+webcam:
+  ffmpeg: /usr/bin/avconv
+  snapshot: http://127.0.0.1:8080/?action=snapshot
+  stream: /webcam/?action=stream
+  timelapseEnabled: false
+  watermark: false
+  webcamEnabled: false
